@@ -1,0 +1,18 @@
+<h1>Todo List</h1>
+
+<ul>
+  <li *ngFor="let listOfCat of listOfCats;let index = index">
+    <span *ngIf="!listOfCat.isExpand" (click)="handleExpansion(index,true)">+</span><span *ngIf="listOfCat.isExpand" (click)="handleExpansion(index,false)">-</span>{{listOfCat.name}}
+    <span class="delete" (click)="handleDeleteButton(index)">X</span>
+   <div *ngIf="listOfCat.isExpand">
+    <p *ngFor="let list of listOfCat.tasks;let todoIndex = index">    <input type="checkbox" [(ngModel)]="list.isCompleted">
+      <span [ngClass]="{strike:list.isCompleted}">{{list.name}}</span>  
+         <span class="delete" (click)="handleDeleteTodo(index,todoIndex)">X</span>
+    </p>
+      <input type="text" (change)="handleChange($event)" placeholder="new todo"/>
+ <button (click)="handleAddTodo(index)">add</button>
+   </div> 
+  </li>
+</ul>
+<input type="text" [(ngModel)]="addCat" placeholder="new cat"/>
+<button (click)="handleAddCat()">add</button>
